@@ -29,9 +29,9 @@ function data()
             -- TODO: create init.bat and choose between the two
             local out = nil
 	    if doWindows() then 
-	       io.popen("mods\\" .. me .. "\\scripts\\init.bat")
+	       out = io.popen("mods\\" .. me .. "\\scripts\\init.bat")
 	    else 
-	       io.popen("mods/" .. me .. "/scripts/init") 
+	       out = io.popen("mods/" .. me .. "/scripts/init") 
 	    end
             -- We don\'t want to open a file in /tmp/tf-dash/ until the init
             -- script finishes

@@ -41,44 +41,6 @@ local function doWindows()
    return string.sub(package.config, 1, 1) == "\\"
 end
 
-local settings = nil
-local function getSettings()
-   if not settings then
-      local function tryOpen(name)
-	 local ret, err = os.open(name)
-	 if ret then log("Reading settings from ", name);
-	 else log("Error opening ", name, ": ", err)  end
-	 return ret
-      end
-      local sep = "/"
-      if doWindows() then sep = "\\" end
-      local home = os.getenv("HOME")
-      if not home then
-	 home = ((os.getenv(HOMEDRIVE) or "%HOMEDRIVE% unset")
-		  .. ":\\" .. 
-	          (os.getenv(HOMEPATH) or "%HOMEPATH% unset"))
-      end
-      log("Loading settings: searching ", home)
-      local f = tryOpen(home .. sep .. ".tfdashrc") or
-	 tryOpen(home .. sep .. "tfdash.rc") or
-	 tryOpen("mods/urbanspreadsheets/tfdash.rc")
-      if f then
-	 local r = load(f)
-	 assert(type(r) == "function",
-		"bad .tfdashrc: expected function, found " .. tostring(r))
-	 settings = r()
-      else
-	 log("Could not load settings")
-	 settings = {
-	    speedUnit = "KPH",
-	    fontSize = "8pt",
-	    menuFontSize = "7pt",
-	 }
-      end
-   end
-   return settings
-end
-
 -- Write the <img> link for the given cargo type to a file f.
 local function write_icon(f, cargo)
     local filename = cargo_icon[cargo]
@@ -146,6 +108,44 @@ local function logObj(obj, pfx)
     if pfx then logfile:write(pfx, " = ") end
     serialize_to(obj, logfile)
     return obj
+end
+
+local settings = nil
+local function getSettings()
+   if not settings then
+      local function tryOpen(name)
+	 local ret, err = io.open(name)
+	 if ret then log("Reading settings from ", name);
+	 else log("Error opening ", name, ": ", err)  end
+	 return ret
+      end
+      local sep = "/"
+      if doWindows() then sep = "\\" end
+      local home = os.getenv("HOME")
+      if not home then
+	 home = ((os.getenv("HOMEDRIVE") or "%HOMEDRIVE% unset")
+		  .. ":\\" ..
+		  (os.getenv("HOMEPATH") or "%HOMEPATH% unset"))
+      end
+      log("Loading settings: searching ", home)
+      local f = tryOpen(home .. sep .. ".tfdashrc") or
+	 tryOpen(home .. sep .. "tfdash.rc") or
+	 tryOpen("mods/urbanspreadsheets/tfdash.rc")
+      if f then
+	 local r = load(f)
+	 assert(type(r) == "function",
+		"bad .tfdashrc: expected function, found " .. tostring(r))
+	 settings = r()
+      else
+	 log("Could not load settings")
+	 settings = {
+	    speedUnit = "KPH",
+	    fontSize = "8pt",
+	    menuFontSize = "7pt",
+	 }
+      end
+   end
+   return settings
 end
 
 -- Returns a caching wrapper around game.interface.getEntity
