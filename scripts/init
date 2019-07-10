@@ -1,0 +1,20 @@
+#!/bin/sh
+# -*- mode: shell-script -*-
+# Copyright (c) 2019 Jason Baker
+# AUTHORS: Jason Baker (jason.baker0@gmail.com)
+# All code copyright by the authors listed in the respective source files
+# and licenced under GPLv3 and higher.  See doc/COPYING for details.
+
+self="urbanspreadsheets_webdash_1"
+
+# It seems that lua's io.popen doesn't provide access to stderr or
+# exit status.  Oh well.
+die() {
+    echo "$@"
+    exit 1
+}
+
+rm -rf /tmp/tf-dash || die "Can't remove existing html directory"
+mkdir /tmp/tf-dash
+cp mods/${self}/www/* /tmp/tf-dash
+echo -n > /tmp/tf-dash/stop-log.txt

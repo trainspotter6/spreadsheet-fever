@@ -1,0 +1,11 @@
+-- -*- Mode: lua -*-
+-- Be sure to keep doc/README.md in sync with the rest of this file.
+-- Configuration for Spreadsheet Fever.
+function data() {
+    return {
+       speedUnit = "MPH",	-- MPH, KPH, or mps (meters/sec)
+       fontSize = "8pt",	-- compact
+       menuFontSize = "7pt",	-- a little more compact
+    }
+}
+

@@ -1,0 +1,42 @@
+/* Copyright (c) 2019 Jason Baker jason.baker0@gmail.com
+ * AUTHORS: Jason Baker (jason.baker0@gmail.com)
+ * All code copyright by the authors listed in the respective source files
+ * and licenced under GPLv3 and higher.	 See LICENSE for details.
+ */
+body {
+    color: white;
+    background: black;
+}
+table {
+    border: 1px solid white;
+    margin: 1em;
+    display: inline-block;
+    vertical-align: top;
+}
+td.scol {			/* unused right now */
+    vertical-align: top;
+}
+td.stopped {
+    color: black;
+    background-color: #eedd82;	/* light goldenrod */
+}
+tr.growing {
+    color: black;
+    background-color: #90ee90;	/* light green */
+}
+tr.shrinking {
+    color: black;
+    background-color: #ff3030;	/* firebrick1 */
+}
+td.stripe {
+    background-color: #303030;	/* grey20 */
+}
+tr.striped:nth-child(even) {
+    background-color: #303030;	/* grey20 */
+}
+a {				/* normal blue on black is not good */
+    color:            #63b8ff	/* steel blue 1 */
+}
+td.num {
+    text-align: right
+}
