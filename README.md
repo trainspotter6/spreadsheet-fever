@@ -88,6 +88,9 @@ have a few interesting files:
    `checkHealth()` (to update stop-log.txt) and `genFile()` (to
    overwrite `dash.html`) when appropriate.
 
+* Git access at 
+  [github](https://github.com/trainspotter6/spreadsheet-fever.git)
+
 I've scribbled my thoughts on where to go from here in wishlist.md.
 
 ## Limitations
@@ -112,9 +115,6 @@ The Spreadsheet Fever dashboard is very much limited by TF's lua api:
 
 * No way to examine user settings stored in the steam userdata dir
   (eg speedUnit).
-
-* Git access at 
-  [github](https://github.com/trainspotter6/spreadsheet-fever.git)
 
 ## Endnotes
 
